@@ -10,7 +10,6 @@ import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
 import TypographyExtension from "@tiptap/extension-typography";
 import UnderlineExtension from "@tiptap/extension-underline";
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
@@ -22,11 +21,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Focus from "@tiptap/extension-focus";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
-import VideoPlayerExtension from "../extension/VideoPlayer";
 import Image from "../extension/Image";
-// import Image from "@tiptap/extension-image";
-// Image.
-// VideoPlayerExtension.
 import { ColorHighlighter } from "./ColourHighlighter";
 import { SmilieReplacer } from "./SmilieReplacer";
 
@@ -78,7 +73,6 @@ export default function EditorComponent({
       Dropcursor,
       Code,
       Link,
-      CodeBlockLowlight,
       CharacterCount.configure({
         limit,
       }),
@@ -91,7 +85,6 @@ export default function EditorComponent({
       }),
       ColorHighlighter,
       SmilieReplacer,
-      VideoPlayerExtension,
       Image,
     ],
     content: content,

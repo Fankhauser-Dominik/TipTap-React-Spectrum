@@ -26,15 +26,13 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 
 import Paper from "@mui/material/Paper";
 
 import ToggleButton from "@mui/material/ToggleButton";
-import { Typography, Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 
 import PickImage from "../renderers/ImageRenderer";
-import PickVideo from "../renderers/VideoRenderer";
 
 import StyledToggleButtonGroup from "components/content/StyledToggleButtonGroup";
 
@@ -42,7 +40,6 @@ import HeadingToolbarButtons from "components/content/toolbars/HeadingToolbarBut
 
 const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
   const [OpenPickImage, setOpenPickImage] = React.useState(false);
-  const [OpenPickVideo, setOpenPickVideo] = React.useState(false);
 
   if (!editor) {
     return null;
@@ -215,24 +212,6 @@ const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
                 // @ts-ignore
                 .setImage({ src: value.src, alt: value.alt })
                 .run();
-            }}
-          />
-          <ToggleButton
-            onClick={() => {
-              console.log(editor.state);
-              setOpenPickVideo(true);
-            }}
-            selected={editor.isActive("videoPlayer")}
-            value="videoPlayer"
-            aria-label="videoPlayer"
-          >
-            <VideoLibraryIcon />
-          </ToggleButton>
-          <PickVideo
-            open={OpenPickVideo}
-            handleClose={() => setOpenPickVideo(false)}
-            setThumbnail={(value: { src: string }) => {
-              editor.chain().focus().setVideo({ src: value.src }).run();
             }}
           />
           <ToggleButton
