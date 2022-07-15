@@ -4,23 +4,13 @@ import { Editor } from "@tiptap/react";
 import { Flex, ToggleButton, Picker, Item } from "@adobe/react-spectrum";
 
 export default function HeadingToolbarButtons({ editor }: { editor: Editor }) {
-  /* TODO:
-Paragraph
-H2
-H3
-H4
-H5
-H6
-//Span
-//Blockquote
-Tag Bold: Icon
-Tag Italic: Icon
-Underline: Icon
-Text Bulleted: Icon
-Text Numbered: Icon
-//Link: Icon
-//Fullscreen/Full Screen Exit: Icon
-*/
+  const currentText = () => {
+    if (editor.isActive("heading")) {
+      "H" + editor.getAttributes("heading").level;
+    } else {
+      ("Paragraph");
+    }
+  };
 
   const picker = true;
 
@@ -34,7 +24,7 @@ Text Numbered: Icon
     // { name: "Span" },
     //{ name: "Blockquote" },
   ];
-  let [heading, setHeading] = React.useState("Paragraph");
+  let [heading, setHeading]: any = React.useState(currentText());
 
   const pickerChange = (selected: string) => {
     setHeading(selected);
@@ -70,6 +60,14 @@ Text Numbered: Icon
         break;
     }
   };
+
+  React.useEffect(() => {
+    setHeading(
+      editor.isActive("heading")
+        ? "H" + editor.getAttributes("heading").level
+        : "Paragraph"
+    );
+  }, [editor, currentText]);
 
   return (
     <Flex alignItems="center">
