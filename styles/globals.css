@@ -50,7 +50,7 @@ a {
 }
 
 .title a {
-  color: limegreen;
+  color: #1373e6;
   text-decoration: none;
 }
 
@@ -135,4 +135,25 @@ a {
     width: 100%;
     flex-direction: column;
   }
+}
+
+.ToggleButton:hover {
+  background-color: var(
+    --spectrum-actionbutton-quiet-background-color-selected,
+    var(--spectrum-global-color-gray-100)
+  ) !important;
+  border-color: var(
+    --spectrum-actionbutton-quiet-border-color-selected,
+    var(--spectrum-alias-border-color)
+  ) !important;
+  color: var(
+    --spectrum-actionbutton-quiet-text-color-selected,
+    var(--spectrum-alias-text-color)
+  ) !important;
+}
+
+.css-zr5esl .has-focus {
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px #1373e6;
+  padding: 5px 5px;
 }
