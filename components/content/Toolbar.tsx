@@ -13,7 +13,6 @@ import TagUnderline from "@spectrum-icons/workflow/TagUnderline";
 import TextStrikethrough from "@spectrum-icons/workflow/TextStrikethrough";
 import Code from "@spectrum-icons/workflow/Code";
 import ColorFill from "@spectrum-icons/workflow/ColorFill";
-import ImageAdd from "@spectrum-icons/workflow/ImageAdd";
 import Link from "@spectrum-icons/workflow/Link";
 import Unlink from "@spectrum-icons/workflow/Unlink";
 import TextBulleted from "@spectrum-icons/workflow/TextBulleted";
@@ -21,52 +20,62 @@ import TextNumbered from "@spectrum-icons/workflow/TextNumbered";
 import Undo from "@spectrum-icons/workflow/Undo";
 import Redo from "@spectrum-icons/workflow/Redo";
 
-import { Flex, ToggleButton, Divider, View } from "@adobe/react-spectrum";
-
-import PickImage from "../renderers/ImageRenderer";
+import {
+  Divider,
+  Flex,
+  ToggleButton,
+  Tooltip,
+  TooltipTrigger,
+  View,
+} from "@adobe/react-spectrum";
 
 import HeadingToolbarButtons from "components/content/toolbars/HeadingToolbarButtons";
 
 const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
-  const [OpenPickImage, setOpenPickImage] = React.useState(false);
-
-  if (!editor) {
-    return null;
-  }
-
   return (
     <View borderWidth="thin" borderColor="dark" borderRadius="regular">
-      <Flex gap="size-50" margin="size-100" UNSAFE_className="FLEXERINO" wrap>
+      <Flex gap="size-50" margin="size-100" wrap>
         <HeadingToolbarButtons editor={editor} />
-        <ToggleButton
-          onPress={() => editor.chain().focus().toggleBold().run()}
-          isSelected={editor.isActive("bold")}
-          aria-label="bold"
-        >
-          <TagBold size="S" />
-        </ToggleButton>
-
-        <ToggleButton
-          onPress={() => editor.chain().focus().toggleItalic().run()}
-          aria-label="italic"
-          isSelected={editor.isActive("italic")}
-        >
-          <TagItalic size="S" />
-        </ToggleButton>
-        <ToggleButton
-          onPress={() => editor.chain().focus().toggleUnderline().run()}
-          isSelected={editor.isActive("underline")}
-          aria-label="underline"
-        >
-          <TagUnderline size="S" />
-        </ToggleButton>
-        <ToggleButton
-          onPress={() => editor.chain().focus().toggleStrike().run()}
-          aria-label="strike"
-          isSelected={editor.isActive("strike")}
-        >
-          <TextStrikethrough size="S" />
-        </ToggleButton>
+        <TooltipTrigger delay={500}>
+          <ToggleButton
+            onPress={() => editor.chain().focus().toggleBold().run()}
+            isSelected={editor.isActive("bold")}
+            aria-label="bold"
+          >
+            <TagBold size="S" />
+          </ToggleButton>
+          <Tooltip>Text Bold</Tooltip>
+        </TooltipTrigger>
+        <TooltipTrigger delay={500}>
+          <ToggleButton
+            onPress={() => editor.chain().focus().toggleItalic().run()}
+            aria-label="italic"
+            isSelected={editor.isActive("italic")}
+          >
+            <TagItalic size="S" />
+          </ToggleButton>
+          <Tooltip>Text Italic</Tooltip>
+        </TooltipTrigger>
+        <TooltipTrigger delay={500}>
+          <ToggleButton
+            onPress={() => editor.chain().focus().toggleUnderline().run()}
+            isSelected={editor.isActive("underline")}
+            aria-label="underline"
+          >
+            <TagUnderline size="S" />
+          </ToggleButton>
+          <Tooltip>Text Underlined</Tooltip>
+        </TooltipTrigger>
+        <TooltipTrigger delay={500}>
+          <ToggleButton
+            onPress={() => editor.chain().focus().toggleStrike().run()}
+            aria-label="strike"
+            isSelected={editor.isActive("strike")}
+          >
+            <TextStrikethrough size="S" />
+          </ToggleButton>
+          <Tooltip>Text Strikethrough</Tooltip>
+        </TooltipTrigger>
         <Divider orientation="vertical" size="M" />
         <ToggleButton
           onPress={() => editor.chain().focus().setTextAlign("left").run()}
@@ -126,27 +135,6 @@ const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
         >
           <ColorFill size="S" />
         </ToggleButton>
-        <ToggleButton
-          onPress={() => {
-            setOpenPickImage(true);
-          }}
-          isSelected={editor.isActive("image-renderer")}
-          aria-label="image-renderer"
-        >
-          <ImageAdd size="S" />
-        </ToggleButton>
-        <PickImage
-          open={OpenPickImage}
-          handleClose={() => setOpenPickImage(false)}
-          setThumbnail={(value: { src: string; alt?: string }) => {
-            editor
-              .chain()
-              .focus()
-              // @ts-ignore
-              .setImage({ src: value.src, alt: value.alt })
-              .run();
-          }}
-        />
         <ToggleButton
           onPress={() => {
             const previousUrl = editor.getAttributes("link").href;

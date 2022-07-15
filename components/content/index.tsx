@@ -16,14 +16,13 @@ import TextAlign from "@tiptap/extension-text-align";
 import Focus from "@tiptap/extension-focus";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
-import Image from "../extension/Image";
-import { ColorHighlighter } from "./ColourHighlighter";
-import { SmilieReplacer } from "./SmilieReplacer";
 
 import ProjectCreateContentToolbar from "./Toolbar";
 
+import { Flex } from "@adobe/react-spectrum";
+
 // import "./styles.scss";
-import EditorStyled from "./style";
+//import EditorStyled from "./style";
 
 export default function EditorComponent({
   // setContent,
@@ -57,19 +56,12 @@ export default function EditorComponent({
         className: "has-focus",
         mode: "all",
       }),
-      ColorHighlighter,
-      SmilieReplacer,
-      Image,
     ],
     content: content,
   });
 
-  /* React.useMemo(() => {
-    if (editor?.getHTML()) setContent(editor?.getHTML());
-  }, [editor?.getHTML()]); */
-
   return (
-    <EditorStyled>
+    <Flex direction="column">
       {editor && <ProjectCreateContentToolbar editor={editor} />}
       <EditorContent editor={editor} />
       {editor && (
@@ -91,6 +83,6 @@ export default function EditorComponent({
           </div>
         </div>
       )}
-    </EditorStyled>
+    </Flex>
   );
 }
